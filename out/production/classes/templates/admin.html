@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Admin insert products list</title>
+    <!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">-->
+    <!--&lt;!&ndash; Latest compiled and minified CSS &ndash;&gt;-->
+    <!--<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">-->
+
+    <!--&lt;!&ndash; Optional theme &ndash;&gt;-->
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
+
+    <!--&lt;!&ndash; Latest compiled and minified JavaScript &ndash;&gt;-->
+    <!--<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <style type="text/css">
+        .menu-item{
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            margin-top: 2px;
+            display: inline-block;
+        }
+        .menu-item a{
+            display: block;
+            padding: 10px 15px;
+            text-decoration: none;
+            background: red;
+            color: white;
+        }
+        .menu-item a:hover{
+            background: green;
+        }
+    </style>
+</head>
+<body>
+
+
+<nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#">WebSiteName</a>
+        </div>
+        <ul class="nav navbar-nav">
+            <li><a href="/">Home</a></li>
+            <li class="active" ><a href="/admin">Admin</a></li>
+            <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Page <span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                    <li><a href="#">Page 1-1</a></li>
+                    <li><a href="#">Page 1-2</a></li>
+                    <li><a href="#">Page 1-3</a></li>
+                </ul>
+            </li>
+
+            <li><a href="#">Page 3</a></li>
+        </ul>
+    </div>
+</nav>
+    <h2>Admin - Product pages</h2>
+    <div style="border: 1px solid red ; background: green ;color:white;padding:5px" class="khung-text">
+        <span th:text="${messege}"></span>
+    </div>
+    <a th:href="@{/}" style="margin-top: 30px; border: 1px solid transparent; padding: 5px; border-radius: 4px 4px; background: blue ;
+		color: white ; text-decoration: none;"  >Back to index</a>
+
+    <div class="container main-content list" style="margin-top: 20px">
+        <div th:if="${success}" class="row alert alert-success alert-dismissible">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <span th:text="${success}"></span>
+        </div>
+
+        <th:block th:if="${#lists.isEmpty(contacts)}">
+            <h3>No contacts</h3>
+        </th:block>
+
+        <th:block th:unless="${#lists.isEmpty(contacts)}">
+            <div class="row">
+                <a th:href="@{/admin/create}" class="btn btn-success pull-left" >
+                    <span class="glyphicon glyphicon-plus"></span> Add new contact
+                </a>
+                <form class="form-inline pull-right" action="#" th:action="@{/admin/search}" method="GET">
+                    <div class="form-group">
+                        <input type="text" class="form-control" name="q"
+                               placeholder="Type contact name..." />
+                    </div>
+                    <button type="submit" class="btn btn-primary">Search</button>
+                </form>
+            </div>
+            <div class="row">
+                <table class="table table-bordered table-hover"  style="margin-top:20px">
+                    <thead>
+                    <tr>
+                        <th>Stt</th>
+                        <th>Name</th>
+                        <th>Image</th>
+                        <th>ShortDesc</th>
+                        <th>CreatedDate</th>
+                        <th>Edit</th>
+                        <th>Delete  </th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="contact,iterStat : ${contacts}">
+                        <td th:text="${iterStat.count}"></td>
+                        <td th:text="${contact.name}"></td>
+                        <td><img th:src="${contact.image}" alt=""></td>
+                        <td th:text="${contact.shortDesc}"></td>
+                        <td th:text="${contact.createdDate}"></td>
+
+                        <!--duong dan de di toi trang sua lien he-->
+                        <td><a th:href="@{/admin/{id}/edit(id=${contact.id})}"><span class="glyphicon glyphicon-pencil"></span></a></td>
+
+                        <!--duong dan de tien hanh xoa lien he-->
+                        <td><a><span class="glyphicon glyphicon-trash" th:attr="data-id=${contact.id}" onclick="my(event)"></span></a></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </th:block>
+    </div>
+    <hr>
+
+
+    <div class="row">
+
+
+        <div class="col-sm-3 col-md-3 col-lg-3 col-xs-12">
+
+            <div class="thumbnail1">
+                <a href="" target="">
+
+                    <div class="caption olala">
+                        Produc us
+                    </div>
+                </a>
+            </div>
+        </div>
+        <div class="col-sm-3 col-md-3 col-lg-3 col-xs-12">
+
+            <div class="thumbnail1">
+                <a href="" target="">
+
+                    <div class="caption olala ">
+                        Pruduct for mac
+                    </div>
+                </a>
+            </div>
+        </div>
+        <div class="col-sm-3 col-md-3 col-lg-3 col-xs-12">
+
+            <div class="thumbnail1">
+                <a href="" target="">
+
+                    <div class="caption olala">
+                        Web analytics
+                    </div>
+                </a>
+            </div>
+        </div>
+        <div class="col-sm-3 col-md-3 col-lg-3 col-xs-12">
+
+            <div class="thumbnail1">
+                <a href="" target="">
+
+                    <div class="caption olala">
+                        Product Help
+                    </div>
+                </a>
+            </div>
+        </div>
+        <div class="col-sm-3 col-md-3 col-lg-3 col-xs-12">
+
+            <div class="thumbnail1">
+                <a href="" target="">
+
+                    <div class="caption olala">
+                        Blog
+                    </div>
+                </a>
+            </div>
+        </div>
+        <div class="col-sm-3 col-md-3 col-lg-3 col-xs-12">
+
+            <div class="thumbnail1">
+                <a href="" target="">
+
+                    <div class="caption olala">
+                        Product for Windows
+                    </div>
+                </a>
+            </div>
+        </div>
+        <div class="col-sm-3 col-md-3 col-lg-3 col-xs-12">
+
+            <div class="thumbnail1">
+                <a href="" target="">
+
+                    <div class="caption olala">
+                        Presentation
+                    </div>
+                </a>
+            </div>
+        </div>
+        <div class="col-sm-3 col-md-3 col-lg-3 col-xs-12">
+
+            <div class="thumbnail1">
+                <a href="" target="">
+
+                    <div class="caption olala">
+                        Developper API
+                    </div>
+                </a>
+            </div>
+        </div>
+        <hr>
+        <hr style="margin: 40px 40px;">
+
+        <div class=" col-md-4 col-lg-4 col-xs-12">
+
+            <div class="thumbnail1">
+                <a href="" target="">
+
+                    <div class="caption olala">
+                        2013 Company Game
+                    </div>
+                </a>
+            </div>
+        </div>
+        <div class=" col-md-4 col-lg-4 col-xs-12">
+
+            <div class="thumbnail1">
+                <a href="" target="">
+
+                    <div class="caption olala">
+                        Teams of Service
+                    </div>
+                </a>
+            </div>
+        </div>
+        <div class=" col-md-4 col-lg-4 col-xs-12">
+
+            <div class="thumbnail1">
+                <a href="" target="">
+
+                    <div class="caption olala">
+                        Prevacy
+                    </div>
+                </a>
+            </div>
+        </div>
+
+
+    </div>
+
+<script th:inline="javascript">
+    function my(event) {
+        event.preventDefault();
+        let host = window.location.origin;
+        var r = confirm("Ban co muon xoa k ??");
+        if (r == true){
+            const id = event.target.dataset.id;
+            fetch(`${host}/admin/${id}/delete/`)
+            .then(data => console.log(data))
+            .catch (err => conosle.log(err));
+            window.location.reload();
+        }
+    }
+</script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+</body>
+</html>

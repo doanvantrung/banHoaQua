@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Demo product list</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap-theme.min.css">
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+    <style>
+        .padding{
+            padding: 5px;
+        }
+        .caption{
+            text-align: center;
+
+        }
+        .thumbnail a:hover{
+            text-decoration: none;
+        }
+        .as:hover{
+            background: red !important;
+        }
+
+        .menu-item{
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            margin-top: 2px;
+            display: inline-block;
+        }
+        .menu-item a{
+            display: block;
+            padding: 10px 15px;
+            text-decoration: none;
+            background: red;
+            color: white;
+        }
+        .menu-item a:hover{
+            background: green;
+        }
+    </style>
+</head>
+<body>
+
+
+<div class="container main-content form">
+    <div class="row">
+        <form action="#" th:action="@{/admin/save}" th:object="${contact}"
+              method="POST" novalidate="novalidate">
+            <input type="hidden" th:field="*{id}" />
+            <div class="form-group">
+                <label>Name</label>
+                <input type="text" class="form-control"
+                       th:field="*{name}" th:errorclass="field-error" />
+                <em th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></em>
+            </div>
+            <div class="form-group">
+                <label>Image</label>
+                <input type="email" class="form-control"
+                       th:field="*{image}" th:errorclass="field-error" />
+                <!--<em th:if="${#fields.hasErrors('email')}" th:errors="*{image}"></em>-->
+            </div>
+            <div class="form-group">
+                <label>ShortDesc</label>
+                <input type="text" class="form-control" th:field="*{shortDesc}" />
+            </div>
+
+            <button type="submit" class="btn btn-primary">Save</button>
+        </form>
+    </div>
+</div><!-- /.container -->
+
+</body>
+</html>

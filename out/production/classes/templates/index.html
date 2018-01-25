@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Demo product list</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap-theme.min.css">
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+    <style>
+        .padding {
+            padding: 5px;
+        }
+
+        .caption {
+            text-align: center;
+
+        }
+
+        .thumbnail a:hover {
+            text-decoration: none;
+        }
+
+        .as:hover {
+            background: red !important;
+        }
+
+        .menu-item {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            margin-top: 2px;
+            display: inline-block;
+        }
+
+        .menu-item a {
+            display: block;
+            padding: 10px 15px;
+            text-decoration: none;
+            background: red;
+            color: white;
+        }
+
+        .menu-item a:hover {
+            background: green;
+        }
+
+    </style>
+
+</head>
+<body>
+<header>
+    <nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#">WebSiteName</a>
+            </div>
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="/">Home</a></li>
+                <li><a href="/admin">Admin</a></li>
+                <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Page <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">Page 1-1</a></li>
+                        <li><a href="#">Page 1-2</a></li>
+                        <li><a href="#">Page 1-3</a></li>
+                    </ul>
+                </li>
+
+                <li><a href="#">Page 3</a></li>
+            </ul>
+
+
+        </div>
+    </nav>
+</header>
+<div id="myCarousel" class="carousel slide" data-ride="carousel" style="padding: 0px 19px">
+
+    <div class="carousel-inner">
+
+        <div class="item active">
+            <img src="http://tienphong-vdc.com.vn/wp-content/uploads/2017/10/tuyen-vn.jpg" alt="Los Angeles" style="width:100%; height: 400px;">
+
+        </div>
+
+        <div class="item">
+            <img src="http://streaming1.danviet.vn/upload/1-2018/images/2018-01-22/U23-Viet-Nam-da-nhan-thuong-tong-cong-46-ty-dong-duc-chinh-04-1516556370-width1600height1174.jpg" alt="Chicago" style="width:100%; height: 400px;">
+
+        </div>
+
+        <div class="item">
+            <img src="http://streaming1.danviet.vn/upload/1-2018/images/2018-01-23/Ty-le-cuoc-tran-ban-ket-cua-U23-Viet-Nam-Cua-tren-lai-om-han-u23-vietnam-1516686812-width560height324.jpg" alt="New York" style="width:100%;height:400px">
+
+        </div>
+
+
+
+
+        <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+            <span class="glyphicon glyphicon-chevron-left"></span>
+            <span class="sr-only">Previous</span>
+        </a>
+        <a class="right carousel-control" href="#myCarousel" data-slide="next">
+            <span class="glyphicon glyphicon-chevron-right"></span>
+            <span class="sr-only">Next</span>
+        </a>
+
+
+
+
+
+    </div>
+</div>
+
+<div class="col-md-12 col-sm-12" style="margin-top: 20px">
+    <div class="row">
+        <div class="col-md-4 col-sm-4 col-xs-12">
+            <div class="panel panel-success">
+                <div class="panel-heading">Danh Mục</div>
+                <div class="panel-body">
+                    <a href="">Hoa Qủa Đóng Hộp</a>
+                </div>
+                <div class="panel-body">
+                    <a href="">Mâm Lễ Ngày Cưới</a>
+                </div>
+                <div class="panel-body">
+                    <a href="">Trái Cây Kết Giỏ</a>
+                </div>
+                <div class="panel-body">
+                    <a href="">Hoa Qủa Đóng Hộp</a>
+                </div>
+                <div class="panel-body">
+                    <a href="">Mâm Lễ Ngày Cưới</a>
+                </div>
+                <div class="panel-body">
+                    <a href="">Trái Cây Kết Giỏ</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-8 col-sm-8 col-xs-12">
+
+            <div class="panel panel-success">
+                <div class="panel-heading">Information Pagding</div>
+                <div class="panel-body">
+
+                    <p class="padding"> Totao product <span th:text="${paginableItem.getTotalProducts()}"></span></p>
+                    <p class="padding"> Page Size Now <span th:text="${paginableItem.getPageSize()}"></span></p>
+                    <p class="padding"> Page Number Now <span th:text="${paginableItem.getPageNumber()}"></span></p>
+                </div>
+
+            </div>
+
+            <div class="panel panel-success">
+                <div class="panel-heading">Information Pagding
+                    <input style=" float:right" type="text" placeholder="Search..">
+                </div>
+
+                <div class="panel-body">
+
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            <div class="div-sanpham">
+                                Sản Phẩm Đang Giảm Giá Tại Hệ Thống Cửa Hàng Hoa Quả Dorry - Hoa Quả Suất Khẩu Việt Nam
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3 col-sm-4 col-xs-6" th:each="product : ${paginableItem.getListData()}">
+                            <div class="thumbnail">
+                                <a href="/w3images/fjords.jpg" target="_blank">
+                                    <img th:src="${product.getImage()}" alt="Fjords" style="width:100%">
+                                    <div class="caption">
+                                        <span th:text="${product.getName()}"></span>
+                                        <br>
+                                        <i class="fa fa-star-o"></i>
+                                        <i class="fa fa-star-o"></i>
+                                        <i class="fa fa-star-o"></i>
+                                        <i class="fa fa-star-o"></i>
+                                        <i class="fa fa-star-o"></i>
+                                        <br>
+                                        <span style="color: red">
+                                        850.000 VND
+                                        </span>
+                                        <br>
+                                        <button style="background:green ; border-radius: 10px 10px; border:1px solid transparent; padding: 10px 20px"
+                                                class="as">Add to cart
+                                        </button>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+
+    </div>
+
+    <div class="div-footer">
+        <div class="wrapper">
+            <div class="row">
+                <div class="col-sm-3 col-md-3 col-lg-3 col-xs-12">
+
+                    <div class="thumbnail1">
+                        <a href="" target="">
+
+                            <div class="caption olala">
+                                Produc us
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-sm-3 col-md-3 col-lg-3 col-xs-12">
+
+                    <div class="thumbnail1">
+                        <a href="" target="">
+
+                            <div class="caption olala ">
+                                Pruduct for mac
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-sm-3 col-md-3 col-lg-3 col-xs-12">
+
+                    <div class="thumbnail1">
+                        <a href="" target="">
+
+                            <div class="caption olala">
+                                Web analytics
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-sm-3 col-md-3 col-lg-3 col-xs-12">
+
+                    <div class="thumbnail1">
+                        <a href="" target="">
+
+                            <div class="caption olala">
+                                Product Help
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-sm-3 col-md-3 col-lg-3 col-xs-12">
+
+                    <div class="thumbnail1">
+                        <a href="" target="">
+
+                            <div class="caption olala">
+                                Blog
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-sm-3 col-md-3 col-lg-3 col-xs-12">
+
+                    <div class="thumbnail1">
+                        <a href="" target="">
+
+                            <div class="caption olala">
+                                Product for Windows
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-sm-3 col-md-3 col-lg-3 col-xs-12">
+
+                    <div class="thumbnail1">
+                        <a href="" target="">
+
+                            <div class="caption olala">
+                                Presentation
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-sm-3 col-md-3 col-lg-3 col-xs-12">
+
+                    <div class="thumbnail1">
+                        <a href="" target="">
+
+                            <div class="caption olala">
+                                Developper API
+                            </div>
+                        </a>
+                    </div>
+                </div>
+
+                <hr>
+                <hr style="margin: 40px 40px;">
+
+                <div class=" col-md-4 col-lg-4 col-xs-12">
+
+                    <div class="thumbnail1">
+                        <a href="" target="">
+
+                            <div class="caption olala">
+                                2013 Company Game
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <div class=" col-md-4 col-lg-4 col-xs-12">
+
+                    <div class="thumbnail1">
+                        <a href="" target="">
+
+                            <div class="caption olala">
+                                Teams of Service
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <div class=" col-md-4 col-lg-4 col-xs-12">
+
+                    <div class="thumbnail1">
+                        <a href="" target="">
+
+                            <div class="caption olala">
+                                Prevacy
+                            </div>
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</body>
+</html>
